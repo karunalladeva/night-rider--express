@@ -9,6 +9,11 @@ var debug = require('debug')('express-mongo:server');
 var http = require('http');
 
 /**
+ * Environment access
+ */
+process.env= require('config');
+
+/**
  * Get port from environment and store in Express.
  */
 

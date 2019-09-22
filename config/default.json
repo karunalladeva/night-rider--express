@@ -1,0 +1,5 @@
+{
+    "DB": {
+        "MONGOURL": "mongodb://localhost/mongoExpress"
+    }
+}
