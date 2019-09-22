@@ -98,3 +98,38 @@ function onListening() {
  * Middleware access
  */
 require('../loaders/index');
+
+/**
+ * Catch 404 and forward to error handler
+ */
+app.use(function(req, res, next) {
+  var err = new Error('Not Found');
+  err.status = 404;
+  next(err);
+});
+
+/**
+ * Error handler
+ * Render the error page
+ */
+app.use(function (err, req, res, next) {
+  res.status(err.status || 500);
+  res.json(
+    {
+      success: false,
+      data:[],
+      error: {
+        message: "Not Found"
+      }
+    });
+});
+
+app.use( jsonResponse = (res,code,status,data,message) => {
+  res.status(code);
+  res.json(
+    {
+      success: status,
+      data: data,
+      error: { message }
+    });
+});
