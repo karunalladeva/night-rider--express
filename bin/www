@@ -124,6 +124,13 @@ app.use(function (err, req, res, next) {
     });
 });
 
+/**
+ * Will print "unhandledRejection err is not defined"
+ */
+process.on('unhandledRejection', (error) => {
+  console.log('unhandledRejection', error.message);
+});
+
 app.use( jsonResponse = (res,code,status,data,message) => {
   res.status(code);
   res.json(

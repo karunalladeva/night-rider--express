@@ -6,6 +6,12 @@ var app = require('../app');
 
 require('./mongoDB')
 
+/**
+ * Load Mysql
+ */
+
+app.set(mysql = require('./mysql'))
+
 /** 
  * Load Router
 */
