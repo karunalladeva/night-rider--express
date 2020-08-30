@@ -21,10 +21,41 @@ var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
 /**
+ *  Graphql Integration
+ */
+const { ApolloServer } = require('apollo-server-express');
+
+const {schema} = require('../schema')
+const { context, subLifeCycle } = require("../utils/auth")
+
+const apolloServer = new ApolloServer({
+    schema,
+    cors: true,
+    playground: true,
+    introspection: true,
+    tracing: true,
+    path: '/',
+    subscriptions: subLifeCycle,
+    // context
+});
+  
+apolloServer.applyMiddleware({
+    app,
+    path: '/',
+    cors: true,
+});
+
+/**
  * Create HTTP server.
  */
 
 var server = http.createServer(app);
+
+/**
+ *  install graph-ql Subscription Handlers
+ */
+
+apolloServer.installSubscriptionHandlers(server)
 
 /**
  * Listen on provided port, on all network interfaces.
